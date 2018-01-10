@@ -39,8 +39,8 @@ def main():
     # UN-comment tests as you work the problems.
     ####################################################################
 
-#     run_test_init()
-#     run_test_append_string()
+    run_test_init()
+    run_test_append_string()
 #     run_test_double()
 #     run_test_shrink()
 #     run_test_double_then_shrink()
@@ -94,7 +94,7 @@ class Box(object):
           :type volume: int
         """
         # --------------------------------------------------------------
-        # TODO: 2. Implement and test this function.
+        # DONE: 2. Implement and test this function.
         #     See the testing code (below) for more examples.
         # --------------------------------------------------------------
         # --------------------------------------------------------------
@@ -102,6 +102,12 @@ class Box(object):
         #    DIFFICULTY:      3
         #    TIME ESTIMATE:   5 minutes.
         # --------------------------------------------------------------
+
+        self.contents = contents
+        self.volume = volume
+        if len(contents) > volume:
+            self.contents = ''
+
 
     def append_string(self, additional_contents):
         """
@@ -156,6 +162,25 @@ class Box(object):
         #       Read_this_ONLY_when_asked_Part_2.txt
         #    and continue working on the problem.
         # --------------------------------------------------------------
+
+        extra_vol = self.volume - len(self.contents)
+        return_string = ''
+
+        if len(additional_contents) < extra_vol:
+            self.contents = self.contents + additional_contents
+            return ''
+        else:
+            for k in range(extra_vol):
+                string_to_add = additional_contents[k]
+                self.contents = self.contents + string_to_add
+
+            leftover_vol = len(additional_contents) - extra_vol
+            for k in range(leftover_vol):
+                return_string = return_string + additional_contents[
+                    extra_vol + k]
+            return return_string
+
+
 
     def double(self):
         """
